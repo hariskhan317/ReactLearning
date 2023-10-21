@@ -1,58 +1,30 @@
 import './App.css';
-import { useState } from 'react';
- 
+import { useEffect, useState } from 'react';
+import Axios from 'axios';
+
 function App() {
-  // Age
-  // const [age, setAge] = useState(0);
-  // const increaseAge =(()=>{
-  //   const newAge = age +1 
-  //   console.log(age)
-  //   setAge(newAge);
-  // });
+  const [apiData, setApiData] = useState("");
 
-  // input Value
+  const fetchData = (excuse) => {
+    Axios.get(`https://excuser-three.vercel.app/v1/excuse/${excuse}/`).then((res) => {
+      setApiData(res.data[0].excuse);
+    });
+  };
 
-  // const [InputValue, setInputValue] = useState('')
 
-  // const inputHande =((event)=>{
-  //   setInputValue(event.target.value)
-  // })
-
-  const [counter , setCounter] = useState(0);
-
-  const increaseHandle = (() =>{
-    setCounter(counter + 1 )
-  })
-
-  const decreaseHandle = (() =>{
-    setCounter(counter - 1 )
-  })
-
-  const zeroHandle = (() =>{ 
-    setCounter(0)
-  }) 
-
+  // useEffect(() => {
+  //   fetchData();
+  // }, []); // Provide an empty dependency array to run the effect once after the initial render.
 
   return (
     <div className="App">
-      <header className="App-header">
-        
-        {/* Age
-          <button onClick={increaseAge}>dasdasdasd</button>
-          <p>{age}</p> 
-        */}
-
-        {/* input */}
-       {/* <input type='text'  onChange={inputHande}/>
-       <p>{InputValue}</p> */}
-
-       {/* Counter app */}
-       <button onClick={increaseHandle}>Increase</button>
-       <button onClick={decreaseHandle} disabled={counter <=0}>Decrease</button>
-       <button onClick={zeroHandle}>Set Zero</button>
-
-       <p>{counter}</p>
-      </header>
+      <button onClick={()=>fetchData("family")}>Family</button>
+      <button onClick={()=>fetchData("office")}>Office</button>
+      <button onClick={()=>fetchData("children")}>Children</button>
+      {/* Show data */}
+      <div>
+        Data: {apiData}
+      </div>
     </div>
   );
 }
