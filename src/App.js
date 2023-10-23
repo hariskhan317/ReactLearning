@@ -1,58 +1,26 @@
-import './App.css';
-import { useState } from 'react';
+import { BrowserRouter, Route, Routes,Link } from "react-router-dom";
+import Home from './components/home'
+import Product from './components/Products/products'
+import List from './components/Products/list'
+import Search from './components/Products/search'
  
 function App() {
-  // Age
-  // const [age, setAge] = useState(0);
-  // const increaseAge =(()=>{
-  //   const newAge = age +1 
-  //   console.log(age)
-  //   setAge(newAge);
-  // });
-
-  // input Value
-
-  // const [InputValue, setInputValue] = useState('')
-
-  // const inputHande =((event)=>{
-  //   setInputValue(event.target.value)
-  // })
-
-  const [counter , setCounter] = useState(0);
-
-  const increaseHandle = (() =>{
-    setCounter(counter + 1 )
-  })
-
-  const decreaseHandle = (() =>{
-    setCounter(counter - 1 )
-  })
-
-  const zeroHandle = (() =>{ 
-    setCounter(0)
-  }) 
-
-
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        
-        {/* Age
-          <button onClick={increaseAge}>dasdasdasd</button>
-          <p>{age}</p> 
-        */}
-
-        {/* input */}
-       {/* <input type='text'  onChange={inputHande}/>
-       <p>{InputValue}</p> */}
-
-       {/* Counter app */}
-       <button onClick={increaseHandle}>Increase</button>
-       <button onClick={decreaseHandle} disabled={counter <=0}>Decrease</button>
-       <button onClick={zeroHandle}>Set Zero</button>
-
-       <p>{counter}</p>
-      </header>
+      <BrowserRouter>
+      <div>
+        <Link to="/">Home</Link>
+        <Link to="/Product">Product</Link>
+      </div>
+        <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="Product" element={<Product />} >
+                  <Route path="List" element={<List />} />
+                  <Route path="Search" element={<Search />} />
+            </Route>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
