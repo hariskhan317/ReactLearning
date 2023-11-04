@@ -19,6 +19,7 @@ function App() {
                   <Route path="List" element={<List />} />
                   <Route path="Search" element={<Search />} />
             </Route>
+            <Route path="*" element={<h1>Page Not Found</h1>} />
         </Routes>
       </BrowserRouter>
     </div>
