@@ -1,16 +1,20 @@
-import './App.css';
-import {useToggle} from './useToggle'
- 
+import { useCounter } from './hook/useCount'
 function App() {
-  const [isVisible, toggle] = useToggle();
+  const [state, increment, decrement, reset] = useCounter();
 
   return (
     <div className="App">
-      <button onClick={toggle}>
-        {isVisible ? "Show" : "Hide"}
+      <button onClick={increment}>
+        Increase
+      </button>
+      <button onClick={decrement}>
+        Decrease
+      </button>
+      <button onClick={reset}>
+        Restart
       </button>
       <div>
-      {isVisible && <>my name is khan</>}
+        Counter :  {state}
       </div>
     </div>
   );
